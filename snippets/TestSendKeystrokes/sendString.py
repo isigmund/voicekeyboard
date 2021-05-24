@@ -4,12 +4,14 @@ import hid
 hid_path = os.environ.get('HID_PATH', '/dev/hidg0')
 
 
-control_key_none = 0
-control_key_ctrl = 1
-control_key_shift = 2
-control_key_alt = 4
-control_key_meta = 8
+# control keys - these are represented by bits in a integer value
+control_key_none = 0  # no bits set
+control_key_ctrl = 1  # bit 1 on true
+control_key_shift = 2  # bit 2 on true
+control_key_alt = 4  # bit 3 on true
+control_key_meta = 8  # bit 4 on true
 
+# HID keycodes source: https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2
 _LETTER_TO_HID_KEYCODES = {
     ' ': 0x2c,  # Spacebar
     'a': 0x04,  # a
