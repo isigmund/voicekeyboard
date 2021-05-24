@@ -25,7 +25,7 @@ def setup():
     GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
     # set up the edge detection
-    GPIO.add_event_detect(button_pin, GPIO.BOTH, bouncetime=500)
+    GPIO.add_event_detect(button_pin, GPIO.BOTH)
 
 
 def main():
@@ -39,21 +39,18 @@ def main():
                 frames.append(data)
 
             if GPIO.event_detected(button_pin):
-                # if we're here, an edge was recognized
-                sleep(0.005) # debounce for 5mSec
                 # only show valid edges
                 if GPIO.input(button_pin) == 1:
-                    print ("Start recording")
+                    if recording_active == False:
+                         print ("Start recording")
+                         # create pyaudio stream
+                         stream = audio.open(format = form_1,
+                                             rate = samp_rate,
+                                             channels = chans,
+                                             input_device_index = dev_index,
+                                             input = True,
+                                             frames_per_buffer=chunk)
                     recording_active =  True
-
-		    # create pyaudio stream
-                    stream = audio.open(format = form_1,
-                                        rate = samp_rate,
-                                        channels = chans,
-                                        input_device_index = dev_index,
-                                        input = True,
-                                        frames_per_buffer=chunk)
-
                 else:
                     print ("End recording")
                     recording_active = False
