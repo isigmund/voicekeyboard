@@ -46,11 +46,18 @@ _LETTER_TO_HID_KEYCODES = {
 def send(text):
     # Iterate over the string
     for element in text:
-      if element.isupper():
-        control_keys = control_key_shift
-      else:
-        control_keys = control_key_none
-      hid_keycode = _LETTER_TO_HID_KEYCODES[element.lower()]
-      hid.send(hid_path, control_keys, hid_keycode)
+        if element.isupper():
+            control_keys = control_key_shift
+        else:
+            control_keys = control_key_none
+        hid_keycode = _LETTER_TO_HID_KEYCODES[element.lower()]
+        hid.send(hid_path, control_keys, hid_keycode)
 
 
+def main():
+    # sends a teststring to the Keybosr HID device
+    send("This is a test")
+
+
+if __name__ == '__main__':
+    main()
