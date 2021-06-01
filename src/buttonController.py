@@ -33,6 +33,11 @@ class ButtonController:
       self._stop_handler = stopHandler
       
 
+    def __del__(self): 
+      # release pins when destructing the object
+      self._button_mode1.close()
+      self._button_mode2.close() 
+
 
     def button_press_handler(self,pressed_button):
       # handle button presses
@@ -87,7 +92,8 @@ def main():
     pass
 
   finally:
-    print ("\nRelease the used pin(s) and terminate audio")
+    del button_press_handler
+
 
 
 
