@@ -3,6 +3,7 @@
 # install apt-packages
 sudo apt install python3-pip
 sudo apt install python3-gpiozero
+sudo apt install pipenv
 sudo apt install git
 
 
@@ -12,10 +13,7 @@ unzip op_linux_arm_v1.10.0.zip
 mv op ~/.local/bin
 rm op*
 
-
-#install pipenv packages
-pip3  install --user pipenv
-
 # execte .profile to ensure that PATH is set correctly
 source ~/.profile
+
 
